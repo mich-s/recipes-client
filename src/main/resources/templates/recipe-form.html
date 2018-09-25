@@ -1,0 +1,54 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Recipes REST Client</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" 
+			integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+			
+			<style type="text/css">
+				/* .container {
+					margin: 0 auto;
+				} */
+				
+				body {
+					background-image: url("/images/fruit.jpg");
+				}
+
+				.buttons{
+					margin-top:10px;
+				}
+				.btn-info {
+					float:right;
+				}
+				h4 {
+					color: white;
+					text-align: center;
+					margin-top:20px;
+				}
+			</style>
+	</head>
+	<body>
+		
+		<div class="container">
+			<h4>Name</h4>
+			<form th:object="${recipe}" th:action="@{/updateRecipe}" th:method="put">
+				<input th:field="*{id}" type="hidden" >
+				<input th:field="*{name}" type="text" class="form-control">
+				<div class="row">
+					<h4 class="col-3">Ingredients</h4>
+					<h4 class="col-9">Method</h4>				
+				</div>
+				<div class="row">
+					<textarea th:field="*{ingredients}" class="form-control col-3" rows="20" id="ingredients"></textarea>
+					<textarea th:field="*{method}" class="form-control col-9" rows="20" id="method"></textarea>
+				</div>
+				<div class="buttons">
+					<a th:href="@{/recipes}" class="btn btn-secondary">Cancel</a>
+					<button type="submit" class="btn btn-info">Update</button>
+				</div>
+				
+			</form>
+		</div>
+		
+		
+	</body>
+</html>

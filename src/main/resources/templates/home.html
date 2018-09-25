@@ -1,0 +1,70 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Recipes REST Client Home Page</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" 
+			integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+		<style type="text/css">
+			.form-inline{
+				margin: 0 auto;
+			}
+			
+			body {
+					background-image: url("/images/fruit.jpg");
+				}
+				
+			.table {
+				background-color: white;
+			}
+			
+			#name:hover {
+				text-decoration:none;
+				color: green;
+			}
+			h2 {
+				text-align: center;
+			}
+			
+		</style>
+	
+	</head>
+	
+	<body>
+	<div class="container">
+		<h2>Recipe REST Client</h2>
+		<br><br>
+		<form class="form-inline" th:object="${recipe}" th:action="@{/processRecipeForm}" method="post">
+			<input type="hidden" th:field="*{id}">
+			<div class="form-group mx-sm-3 mb-2">
+			<label for="recipe" class="sr-only">Recipe</label>
+			<input th:field="*{name}" type="text" class="form-control" id="recipe" placeholder="add recipe">
+			</div>
+			<button type="submit" class="btn btn-primary mb-2">Add</button>
+				
+		</form>
+		<table class="table">
+				<thead class="thead-light">
+				<tr>
+					<th>Recipes</th>
+					<th></th>
+					<th></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="recipe : ${recipes}">
+					<td class="col-8"> <a th:href="${'/showRecipe/' + recipe.id}" th:text="${recipe.name}" id="name">Name</a></td>
+					
+					<td class="col-2">
+						<a th:href="${'/showRecipeForm/' + recipe.id}" class="btn btn-light" role="button">Update</a>
+					</td>
+					<td class="col-2">
+						<form style="margin:0 auto;" th:object="${recipe}" th:action="@{/deleteRecipe}" th:method="delete">
+				          <input type="hidden" name="id" th:value="*{id}" />
+				          <button class="btn btn-light" type="submit">Delete</button>
+				        </form>
+					</td>
+				</tr>
+				</tbody>
+		</table>
+	</div>	
+	</body>
+</html>
