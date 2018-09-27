@@ -22,7 +22,7 @@ import com.michal.recipesclient.service.RecipeService;
 @RunWith(SpringRunner.class)
 @RestClientTest(RecipeService.class)
 @AutoConfigureWebClient(registerRestTemplate=true)
-public class RecipeClientTests {
+public class RecipeClientTest {
 	
 	@Autowired
 	private RecipeService recipeService;
@@ -34,7 +34,7 @@ public class RecipeClientTests {
 	@Test
 	public void getByIdWhenResultIsSuccesShouldReturnRecipe() throws Exception{
 
-		this.mockServer.expect(requestTo("http://localhost:8080/recipes-app/recipes/1"))
+		this.mockServer.expect(requestTo("http://localhost:8080/recipes-api/recipes/1"))
 						.andExpect(method(HttpMethod.GET))
 						.andRespond(withSuccess(getClassPathResource("recipe.json"), MediaType.APPLICATION_JSON));
 		
